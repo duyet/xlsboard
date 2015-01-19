@@ -21,7 +21,7 @@
 
 <div class="fullwidth bodycontainer colour1 clearfix" id="topcontainer">
 	
-	<h5><?php echo trim(@file_get_contents('title.txt')); ?></h5>
+	<h5>xlsboard</h5>
 
 </div>
 
