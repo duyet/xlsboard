@@ -1,76 +1,61 @@
 <?php
-$defaultSpreadSheet = '1YIFMvnSf9bcmDd3ZGi8kV0VvHkCOkQxWwAYhVedYfhE';
+
+declare(strict_types=1);
+
+/**
+ * Load spreadsheet data
+ *
+ * This file maintains backward compatibility while using the new architecture
+ */
+
+require_once __DIR__ . '/bootstrap.php';
+
+use Xlsboard\Cache;
+use Xlsboard\SpreadsheetLoader;
+
+// Get spreadsheet key from file or environment
+$defaultSpreadSheet = env('XLSBOARD_DEFAULT_SPREADSHEET', '1YIFMvnSf9bcmDd3ZGi8kV0VvHkCOkQxWwAYhVedYfhE');
 $spreadsheetKey = loadSpreadSheetKey($defaultSpreadSheet);
-$datas = loadSpreadsheets($spreadsheetKey);
 
-if (!$datas OR empty($datas)) {
-	die('Empty data!');
-}
+// Initialize loader with caching
+$cacheTtl = (int) env('XLSBOARD_CACHE_TTL', '300');
+$loader = new SpreadsheetLoader(new Cache(), $cacheTtl);
 
-$spreadsheetsCell = array();
-$finalData = array();
-
-foreach ($datas as $data) {
-	if (isset($data) AND isset($data->title)) {
-		$spreadsheetsCell[] = array('cell' => (string)$data->title, 'value' => (string)$data->content);
-		$finalData[(string)$data->title] = (string)$data->content;
-	}
-}
-
-
-$dataArray =  $spreadsheetsCell;
-
-// print_r($finalData);
-
-$maxRow = getMaxRow($dataArray);
-$maxCol = getMaxColumn($dataArray);
-
-$numOfCol = 0;
-for ($i = 'A'; $i <= $maxCol; $i++, $numOfCol++);
-
+// Load spreadsheet data
+$errorMessage = '';
+$finalData = [];
+$maxRow = 0;
+$maxCol = 'A';
 $tableColumnWidth = 100;
-if ($numOfCol)
-	$tableColumnWidth = (100 / $numOfCol);
 
-global $finalData;
+try {
+    $finalData = $loader->load($spreadsheetKey);
+    $maxRow = $loader->getMaxRow($finalData);
+    $maxCol = $loader->getMaxColumn($finalData);
 
-// -----------------------------
+    $numOfCol = $loader->getColumnCount($maxCol);
+    if ($numOfCol > 0) {
+        $tableColumnWidth = 100 / $numOfCol;
+    }
+} catch (\Exception $e) {
+    $errorMessage = $e->getMessage();
 
-function loadSpreadSheetKey($default = '') {
-	$fileData = file_get_contents('data.txt');
-	if (!empty($fileData)) return trim($fileData);
-	
-	return $default;
+    if (env('APP_DEBUG', 'false') === 'true') {
+        $errorMessage .= "\n\nDebug info:\n" . $e->getTraceAsString();
+    }
 }
 
-function loadSpreadsheets($key = '', $sheetid = 1) {
-	if (empty($key)) return false;
-	if (!function_exists('simplexml_load_file')) die('Server not support XML Parser!');
-	
-	$feed = 'https://spreadsheets.google.com/feeds/cells/'. $key .'/'. $sheetid .'/public/values';
+// Backward compatibility: Keep old function for reading spreadsheet key
+function loadSpreadSheetKey(string $default = ''): string
+{
+    $file = __DIR__ . '/data.txt';
 
-	return @simplexml_load_file($feed);
-}
+    if (file_exists($file)) {
+        $fileData = file_get_contents($file);
+        if (!empty($fileData)) {
+            return trim($fileData);
+        }
+    }
 
-
-function getMaxColumn($dataArray = array()) {
-	if (!$dataArray) return false;
-	$maxCol = 'A';
-	foreach ($dataArray as $column) {
-		$colCharacter = substr($column['cell'], 0, 1);
-		if (!empty($colCharacter) AND $colCharacter > $maxCol) $maxCol = $colCharacter;
-	}
-	
-	return $maxCol;
-}
-
-function getMaxRow($dataArray = array()) {
-	if (!$dataArray) return false;
-	$maxRow = 0;
-	foreach ($dataArray as $row) {
-		$rowNum = (int)substr($row['cell'], 1);
-		if (!empty($rowNum) AND $rowNum > $maxRow) $maxRow = $rowNum;
-	}
-	
-	return $maxRow;
+    return $default;
 }

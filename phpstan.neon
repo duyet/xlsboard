@@ -1,0 +1,14 @@
+parameters:
+    level: 8
+    paths:
+        - src
+        - index.php
+        - load.php
+        - m.php
+    excludePaths:
+        - vendor
+        - node_modules
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+        - '#Function simplexml_load_file invoked with#'

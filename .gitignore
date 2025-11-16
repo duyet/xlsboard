@@ -1,0 +1,48 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Composer
+composer.phar
+composer.lock
+
+# Package managers
+package-lock.json
+yarn.lock
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Runtime data
+data.txt
+title.txt
+*.log
+*.pid
+
+# Cache
+/cache/
+*.cache
+
+# Build outputs
+/dist/
+/build/
+
+# Tests
+/coverage/
+.phpunit.result.cache
+
+# Temp files
+*.tmp
+*.swp
+*.swo
+*~
