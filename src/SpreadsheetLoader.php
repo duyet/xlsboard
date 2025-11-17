@@ -74,9 +74,14 @@ class SpreadsheetLoader
         $url = sprintf(self::GOOGLE_SHEETS_URL, $key, $sheetId);
 
         // Suppress warnings and capture errors
-        $previousErrorHandler = set_error_handler(function () {});
+        $previousErrorHandler = set_error_handler(function (int $errno, string $errstr): bool {
+            // Suppress the error
+            return true;
+        });
         $xml = simplexml_load_file($url);
-        restore_error_handler();
+        if ($previousErrorHandler !== null) {
+            restore_error_handler();
+        }
 
         if ($xml === false) {
             throw new \RuntimeException(

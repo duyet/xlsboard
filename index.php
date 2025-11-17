@@ -13,6 +13,12 @@ require_once 'load.php';
 
 use Xlsboard\Security;
 
+// Ensure variables are defined (they are set in load.php, but PHPStan can't track this)
+$maxRow = $maxRow ?? 0;
+$maxCol = $maxCol ?? 'A';
+$finalData = $finalData ?? [];
+$errorMessage = $errorMessage ?? '';
+
 // Get page title
 $titleFile = __DIR__ . '/title.txt';
 $pageTitle = env('XLSBOARD_PAGE_TITLE', 'xlsboard');

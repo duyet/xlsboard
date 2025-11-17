@@ -34,7 +34,12 @@ class Cache
             return null;
         }
 
-        $data = unserialize(file_get_contents($file));
+        $contents = file_get_contents($file);
+        if ($contents === false) {
+            return null;
+        }
+
+        $data = unserialize($contents);
 
         // Check expiration
         if ($data['expires'] < time()) {

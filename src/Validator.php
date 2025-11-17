@@ -45,7 +45,9 @@ class Validator
     public static function sanitizeSpreadsheetKey(string $key): string
     {
         // Remove any characters that aren't alphanumeric, dash, or underscore
-        return preg_replace('/[^a-zA-Z0-9_-]/', '', $key);
+        $result = preg_replace('/[^a-zA-Z0-9_-]/', '', $key);
+
+        return $result !== null ? $result : '';
     }
 
     /**

@@ -91,11 +91,13 @@ $currentData = '';
 $currentTitle = '';
 
 if (file_exists($dataFile)) {
-    $currentData = file_get_contents($dataFile);
+    $data = file_get_contents($dataFile);
+    $currentData = $data !== false ? $data : '';
 }
 
 if (file_exists($titleFile)) {
-    $currentTitle = file_get_contents($titleFile);
+    $title = file_get_contents($titleFile);
+    $currentTitle = $title !== false ? $title : '';
 }
 
 // Generate CSRF token
