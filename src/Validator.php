@@ -31,7 +31,7 @@ class Validator
     public static function isValidTitle(string $title): bool
     {
         // Title should be reasonable length and not contain HTML tags
-        $cleaned = strip_tags($title);
+        $cleaned = trim(strip_tags($title));
 
         return strlen($cleaned) > 0 && strlen($cleaned) <= 200;
     }

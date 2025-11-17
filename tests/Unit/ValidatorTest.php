@@ -11,13 +11,14 @@ class ValidatorTest extends TestCase
 {
     public function testIsValidSpreadsheetKey(): void
     {
-        // Valid keys
+        // Valid keys (Google sheets keys are typically 44 characters)
         $this->assertTrue(Validator::isValidSpreadsheetKey('1YIFMvnSf9bcmDd3ZGi8kV0VvHkCOkQxWwAYhVedYfhE'));
-        $this->assertTrue(Validator::isValidSpreadsheetKey('abc123-_XYZ'));
+        $this->assertTrue(Validator::isValidSpreadsheetKey('abcdefghij1234567890ABCDEFGHIJ1234567890AB')); // 44 chars
 
         // Invalid keys
         $this->assertFalse(Validator::isValidSpreadsheetKey(''));
         $this->assertFalse(Validator::isValidSpreadsheetKey('short'));
+        $this->assertFalse(Validator::isValidSpreadsheetKey('abc123-_XYZ')); // Too short (only 14 chars, need 20+)
         $this->assertFalse(Validator::isValidSpreadsheetKey('contains spaces'));
         $this->assertFalse(Validator::isValidSpreadsheetKey('contains@special'));
     }

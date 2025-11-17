@@ -163,11 +163,7 @@ class SpreadsheetLoader
      */
     public function getColumnCount(string $maxCol): int
     {
-        $count = 0;
-        for ($i = 'A'; $i <= $maxCol; $i++) {
-            $count++;
-        }
-
-        return $count;
+        // Convert column letter to number (A=1, B=2, ..., Z=26)
+        return ord(strtoupper($maxCol)) - ord('A') + 1;
     }
 }

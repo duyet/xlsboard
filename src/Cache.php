@@ -26,7 +26,7 @@ class Cache
      * @param string $key Cache key
      * @return mixed|null Returns null if not found or expired
      */
-    public function get(string $key): mixed
+    public function get(string $key)
     {
         $file = $this->getCacheFile($key);
 
@@ -54,7 +54,7 @@ class Cache
      * @param int $ttl Time to live in seconds
      * @return bool
      */
-    public function set(string $key, mixed $value, int $ttl = 300): bool
+    public function set(string $key, $value, int $ttl = 300): bool
     {
         $file = $this->getCacheFile($key);
 
