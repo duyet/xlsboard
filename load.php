@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 /**
- * Load spreadsheet data
+ * Load spreadsheet data.
  *
- * This file maintains backward compatibility while using the new architecture
+ * This file maintains backward compatibility while using the new architecture.
  */
 
 require_once __DIR__ . '/bootstrap.php';

@@ -3,22 +3,22 @@
 declare(strict_types=1);
 
 /**
- * xlsboard Bootstrap
+ * xlsboard Bootstrap.
  *
- * Initialize application dependencies and autoloading
+ * Initialize application dependencies and autoloading.
  */
 
-// Check if running from vendor (composer install was successful)
+// Check if running from vendor (composer install was successful).
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 
-    // Load .env file if vlucas/phpdotenv is available
+    // Load .env file if vlucas/phpdotenv is available.
     if (class_exists('Dotenv\Dotenv')) {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
         $dotenv->safeLoad();
     }
 } else {
-    // Fallback: Manual autoloading if composer install wasn't run
+    // Fallback: Manual autoloading if composer install wasn't run.
     spl_autoload_register(function ($class) {
         $prefix = 'Xlsboard\\';
         $baseDir = __DIR__ . '/src/';
@@ -36,10 +36,10 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
         }
     });
 
-    // Load helpers
+    // Load helpers.
     require_once __DIR__ . '/src/helpers.php';
 
-    // Load .env manually
+    // Load .env manually.
     if (file_exists(__DIR__ . '/.env')) {
         $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($lines as $line) {
@@ -60,7 +60,7 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     }
 }
 
-// Error handling
+// Error handling.
 if (env('APP_DEBUG', 'false') === 'true') {
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
