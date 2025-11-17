@@ -50,16 +50,16 @@ class CacheTest extends TestCase
         $key = 'expiring_key';
         $value = 'expiring_value';
 
-        // Set with 1 second TTL
+        // Set with 1 second TTL.
         $this->cache->set($key, $value, 1);
 
-        // Should exist immediately
+        // Should exist immediately.
         $this->assertEquals($value, $this->cache->get($key));
 
-        // Wait for expiration
+        // Wait for expiration.
         sleep(2);
 
-        // Should be null after expiration
+        // Should be null after expiration.
         $this->assertNull($this->cache->get($key));
     }
 

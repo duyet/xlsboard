@@ -11,7 +11,7 @@ class SecurityTest extends TestCase
 {
     protected function setUp(): void
     {
-        // Clear session before each test
+        // Clear session before each test.
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_destroy();
         }
@@ -25,9 +25,9 @@ class SecurityTest extends TestCase
     {
         $token1 = Security::generateCsrfToken();
         $this->assertNotEmpty($token1);
-        $this->assertEquals(64, strlen($token1)); // 32 bytes = 64 hex chars
+        $this->assertEquals(64, strlen($token1)); // 32 bytes = 64 hex chars.
 
-        // Same token should be returned on subsequent calls in same session
+        // Same token should be returned on subsequent calls in same session.
         $token2 = Security::generateCsrfToken();
         $this->assertEquals($token1, $token2);
     }
@@ -39,10 +39,10 @@ class SecurityTest extends TestCase
     {
         $token = Security::generateCsrfToken();
 
-        // Valid token
+        // Valid token.
         $this->assertTrue(Security::verifyCsrfToken($token));
 
-        // Invalid token
+        // Invalid token.
         $this->assertFalse(Security::verifyCsrfToken('invalid_token'));
     }
 
@@ -58,13 +58,13 @@ class SecurityTest extends TestCase
             Security::escape('Normal text')
         );
 
-        // Note: htmlspecialchars with ENT_HTML5 uses &apos; for single quote
+        // Note: htmlspecialchars with ENT_HTML5 uses &apos; for single quote.
         $escaped = Security::escape('&<>"\'');
         $this->assertStringContainsString('&amp;', $escaped);
         $this->assertStringContainsString('&lt;', $escaped);
         $this->assertStringContainsString('&gt;', $escaped);
         $this->assertStringContainsString('&quot;', $escaped);
-        // Single quote can be &#039; or &apos; depending on PHP version
+        // Single quote can be &#039; or &apos; depending on PHP version.
         $this->assertTrue(
             strpos($escaped, '&#039;') !== false || strpos($escaped, '&apos;') !== false,
             'Single quote should be escaped'
@@ -76,25 +76,25 @@ class SecurityTest extends TestCase
      */
     public function testAuthentication(): void
     {
-        // Set password via environment
+        // Set password via environment.
         putenv('XLSBOARD_ADMIN_PASSWORD=test123');
 
-        // Should not be authenticated initially
+        // Should not be authenticated initially.
         $this->assertFalse(Security::isAuthenticated());
 
-        // Wrong password
+        // Wrong password.
         $this->assertFalse(Security::authenticate('wrong_password'));
         $this->assertFalse(Security::isAuthenticated());
 
-        // Correct password
+        // Correct password.
         $this->assertTrue(Security::authenticate('test123'));
         $this->assertTrue(Security::isAuthenticated());
 
-        // Logout
+        // Logout.
         Security::logout();
         $this->assertFalse(Security::isAuthenticated());
 
-        // Clean up
+        // Clean up.
         putenv('XLSBOARD_ADMIN_PASSWORD');
     }
 }
