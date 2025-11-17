@@ -87,7 +87,7 @@ class Security
     {
         $envPassword = getenv('XLSBOARD_ADMIN_PASSWORD');
 
-        // If no password set in env, use default (insecure!)
+        // If no password set in env, use default (insecure!).
         if ($envPassword === false || $envPassword === '') {
             $envPassword = 'admin'; // Default password for backwards compatibility
         }

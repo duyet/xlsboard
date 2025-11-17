@@ -17,8 +17,8 @@ class Validator
      */
     public static function isValidSpreadsheetKey(string $key): bool
     {
-        // Google spreadsheet keys are typically 44 characters, alphanumeric with dashes and underscores
-        // Example: 1YIFMvnSf9bcmDd3ZGi8kV0VvHkCOkQxWwAYhVedYfhE
+        // Google spreadsheet keys are typically 44 characters, alphanumeric with dashes and underscores.
+        // Example: 1YIFMvnSf9bcmDd3ZGi8kV0VvHkCOkQxWwAYhVedYfhE.
         return preg_match('/^[a-zA-Z0-9_-]{20,100}$/', $key) === 1;
     }
 
@@ -30,7 +30,7 @@ class Validator
      */
     public static function isValidTitle(string $title): bool
     {
-        // Title should be reasonable length and not contain HTML tags
+        // Title should be reasonable length and not contain HTML tags.
         $cleaned = trim(strip_tags($title));
 
         return strlen($cleaned) > 0 && strlen($cleaned) <= 200;
@@ -44,7 +44,7 @@ class Validator
      */
     public static function sanitizeSpreadsheetKey(string $key): string
     {
-        // Remove any characters that aren't alphanumeric, dash, or underscore
+        // Remove any characters that aren't alphanumeric, dash, or underscore.
         $result = preg_replace('/[^a-zA-Z0-9_-]/', '', $key);
 
         return $result !== null ? $result : '';
@@ -58,7 +58,7 @@ class Validator
      */
     public static function sanitizeTitle(string $title): string
     {
-        // Remove HTML tags and trim
+        // Remove HTML tags and trim.
         return trim(strip_tags($title));
     }
 }

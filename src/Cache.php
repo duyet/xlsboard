@@ -41,7 +41,7 @@ class Cache
 
         $data = unserialize($contents);
 
-        // Check expiration
+        // Check expiration.
         if ($data['expires'] < time()) {
             $this->delete($key);
 

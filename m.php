@@ -13,10 +13,10 @@ require_once __DIR__ . '/bootstrap.php';
 use Xlsboard\Security;
 use Xlsboard\Validator;
 
-// Initialize session for security features
+// Initialize session for security features.
 Security::ensureSession();
 
-// Handle logout
+// Handle logout.
 if (isset($_GET['logout'])) {
     Security::logout();
     header('Location: m.php');
@@ -27,7 +27,7 @@ $error = '';
 $success = '';
 $showLoginForm = !Security::isAuthenticated();
 
-// Handle login
+// Handle login.
 if ($showLoginForm && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $password = $_POST['password'] ?? '';
 
@@ -39,15 +39,15 @@ if ($showLoginForm && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['log
     }
 }
 
-// Handle settings update (only for authenticated users)
+// Handle settings update (only for authenticated users).
 if (!$showLoginForm && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_settings'])) {
-    // Verify CSRF token
+    // Verify CSRF token.
     $token = $_POST['csrf_token'] ?? '';
 
     if (!Security::verifyCsrfToken($token)) {
         $error = 'Invalid security token. Please try again.';
     } else {
-        // Validate and sanitize inputs
+        // Validate and sanitize inputs.
         $spreadsheetKey = $_POST['data'] ?? '';
         $pageTitle = $_POST['page_title'] ?? '';
 
@@ -65,7 +65,7 @@ if (!$showLoginForm && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['up
         }
 
         if (empty($errors)) {
-            // Save to files
+            // Save to files.
             $dataFile = __DIR__ . '/data.txt';
             $titleFile = __DIR__ . '/title.txt';
 
@@ -83,7 +83,7 @@ if (!$showLoginForm && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['up
     }
 }
 
-// Load current settings
+// Load current settings.
 $dataFile = __DIR__ . '/data.txt';
 $titleFile = __DIR__ . '/title.txt';
 
@@ -100,7 +100,7 @@ if (file_exists($titleFile)) {
     $currentTitle = $title !== false ? $title : '';
 }
 
-// Generate CSRF token
+// Generate CSRF token.
 $csrfToken = Security::generateCsrfToken();
 
 ?>

@@ -38,20 +38,20 @@ class SpreadsheetLoader
             throw new \InvalidArgumentException('Spreadsheet key cannot be empty');
         }
 
-        // Try cache first
+        // Try cache first.
         $cacheKey = "sheet_{$key}_{$sheetId}";
         $cached = $this->cache->get($cacheKey);
         if ($cached !== null) {
             return $cached;
         }
 
-        // Fetch from Google
+        // Fetch from Google.
         $data = $this->fetchFromGoogle($key, $sheetId);
 
-        // Parse into cell array
+        // Parse into cell array.
         $cellData = $this->parseData($data);
 
-        // Cache the result
+        // Cache the result.
         $this->cache->set($cacheKey, $cellData, $this->cacheTtl);
 
         return $cellData;
@@ -73,9 +73,9 @@ class SpreadsheetLoader
 
         $url = sprintf(self::GOOGLE_SHEETS_URL, $key, $sheetId);
 
-        // Suppress warnings and capture errors
+        // Suppress warnings and capture errors.
         $previousErrorHandler = set_error_handler(function (int $errno, string $errstr): bool {
-            // Suppress the error
+            // Suppress the error.
             return true;
         });
         $xml = simplexml_load_file($url);
@@ -168,7 +168,7 @@ class SpreadsheetLoader
      */
     public function getColumnCount(string $maxCol): int
     {
-        // Convert column letter to number (A=1, B=2, ..., Z=26)
+        // Convert column letter to number (A=1, B=2, ..., Z=26).
         return ord(strtoupper($maxCol)) - ord('A') + 1;
     }
 }

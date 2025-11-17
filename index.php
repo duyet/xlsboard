@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-// Redirect to settings page if requested
+// Redirect to settings page if requested.
 if (isset($_GET['e'])) {
     require_once 'm.php';
     exit;
 }
 
-// Load spreadsheet data
+// Load spreadsheet data.
 require_once 'load.php';
 
 use Xlsboard\Security;
 
-// Ensure variables are defined (they are set in load.php, but PHPStan can't track this)
+// Ensure variables are defined (they are set in load.php, but PHPStan can't track this).
 $maxRow = $maxRow ?? 0;
 $maxCol = $maxCol ?? 'A';
 $finalData = $finalData ?? [];
 $errorMessage = $errorMessage ?? '';
 
-// Get page title
+// Get page title.
 $titleFile = __DIR__ . '/title.txt';
 $pageTitle = env('XLSBOARD_PAGE_TITLE', 'xlsboard');
 if (file_exists($titleFile)) {
