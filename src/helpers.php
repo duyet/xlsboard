@@ -3,12 +3,11 @@
 declare(strict_types=1);
 
 /**
- * Helper functions for xlsboard
+ * Helper functions for xlsboard.
  */
-
 if (!function_exists('env')) {
     /**
-     * Get environment variable with fallback
+     * Get environment variable with fallback.
      *
      * @param string $key Variable name
      * @param mixed $default Default value
@@ -28,7 +27,7 @@ if (!function_exists('env')) {
 
 if (!function_exists('base_path')) {
     /**
-     * Get base path of application
+     * Get base path of application.
      *
      * @param string $path Optional path to append
      * @return string
@@ -43,7 +42,7 @@ if (!function_exists('base_path')) {
 
 if (!function_exists('storage_path')) {
     /**
-     * Get storage path
+     * Get storage path.
      *
      * @param string $path Optional path to append
      * @return string

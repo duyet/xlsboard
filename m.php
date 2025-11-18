@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 /**
- * Settings Management Page
+ * Settings Management Page.
  *
- * Secure configuration interface with authentication, CSRF protection, and input validation
+ * Secure configuration interface with authentication, CSRF protection, and input validation.
  */
 
 require_once __DIR__ . '/bootstrap.php';

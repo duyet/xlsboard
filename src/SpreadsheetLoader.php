@@ -7,7 +7,7 @@ namespace Xlsboard;
 use SimpleXMLElement;
 
 /**
- * Google Spreadsheet Loader
+ * Google Spreadsheet Loader.
  *
  * Fetches and parses data from Google Spreadsheets public XML feed.
  */
@@ -25,7 +25,7 @@ class SpreadsheetLoader
     }
 
     /**
-     * Load spreadsheet data by key
+     * Load spreadsheet data by key.
      *
      * @param string $key Spreadsheet key
      * @param int $sheetId Sheet ID (default: 1)
@@ -58,7 +58,7 @@ class SpreadsheetLoader
     }
 
     /**
-     * Fetch spreadsheet XML from Google
+     * Fetch spreadsheet XML from Google.
      *
      * @param string $key Spreadsheet key
      * @param int $sheetId Sheet ID
@@ -85,7 +85,7 @@ class SpreadsheetLoader
 
         if ($xml === false) {
             throw new \RuntimeException(
-                "Failed to load spreadsheet from Google. " .
+                'Failed to load spreadsheet from Google. ' .
                 "Please check the spreadsheet key and ensure it's published to the web."
             );
         }
@@ -94,7 +94,7 @@ class SpreadsheetLoader
     }
 
     /**
-     * Parse XML data into cell array
+     * Parse XML data into cell array.
      *
      * @param SimpleXMLElement $data XML data
      * @return array<string, string>
@@ -115,7 +115,7 @@ class SpreadsheetLoader
     }
 
     /**
-     * Get maximum row number from cell data
+     * Get maximum row number from cell data.
      *
      * @param array<string, string> $cellData
      * @return int
@@ -138,7 +138,7 @@ class SpreadsheetLoader
     }
 
     /**
-     * Get maximum column letter from cell data
+     * Get maximum column letter from cell data.
      *
      * @param array<string, string> $cellData
      * @return string
@@ -161,7 +161,7 @@ class SpreadsheetLoader
     }
 
     /**
-     * Calculate number of columns
+     * Calculate number of columns.
      *
      * @param string $maxCol Maximum column letter
      * @return int

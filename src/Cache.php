@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Xlsboard;
 
 /**
- * Simple file-based cache
+ * Simple file-based cache.
  */
 class Cache
 {
@@ -21,7 +21,7 @@ class Cache
     }
 
     /**
-     * Get cached value
+     * Get cached value.
      *
      * @param string $key Cache key
      * @return mixed|null Returns null if not found or expired
@@ -52,7 +52,7 @@ class Cache
     }
 
     /**
-     * Set cache value
+     * Set cache value.
      *
      * @param string $key Cache key
      * @param mixed $value Value to cache
@@ -72,7 +72,7 @@ class Cache
     }
 
     /**
-     * Delete cached value
+     * Delete cached value.
      *
      * @param string $key Cache key
      * @return bool
@@ -89,7 +89,7 @@ class Cache
     }
 
     /**
-     * Clear all cache
+     * Clear all cache.
      *
      * @return bool
      */
@@ -111,7 +111,7 @@ class Cache
     }
 
     /**
-     * Get cache file path
+     * Get cache file path.
      *
      * @param string $key Cache key
      * @return string

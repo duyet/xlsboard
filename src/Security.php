@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Xlsboard;
 
 /**
- * Security utilities
+ * Security utilities.
  */
 class Security
 {
     private const SESSION_TOKEN_KEY = 'xlsboard_csrf_token';
 
     /**
-     * Start session if not already started
+     * Start session if not already started.
      */
     public static function ensureSession(): void
     {
@@ -22,7 +22,7 @@ class Security
     }
 
     /**
-     * Generate CSRF token
+     * Generate CSRF token.
      *
      * @return string
      */
@@ -38,7 +38,7 @@ class Security
     }
 
     /**
-     * Verify CSRF token
+     * Verify CSRF token.
      *
      * @param string $token Token to verify
      * @return bool
@@ -55,7 +55,7 @@ class Security
     }
 
     /**
-     * Escape HTML output
+     * Escape HTML output.
      *
      * @param string $value Value to escape
      * @return string
@@ -66,7 +66,7 @@ class Security
     }
 
     /**
-     * Check if user is authenticated
+     * Check if user is authenticated.
      *
      * @return bool
      */
@@ -78,7 +78,7 @@ class Security
     }
 
     /**
-     * Authenticate user
+     * Authenticate user.
      *
      * @param string $password Password to check
      * @return bool
@@ -103,7 +103,7 @@ class Security
     }
 
     /**
-     * Logout user
+     * Logout user.
      */
     public static function logout(): void
     {
@@ -113,7 +113,7 @@ class Security
     }
 
     /**
-     * Require authentication or redirect
+     * Require authentication or redirect.
      *
      * @param string $redirectUrl URL to redirect to if not authenticated
      */

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Xlsboard;
 
 /**
- * Input validation
+ * Input validation.
  */
 class Validator
 {
     /**
-     * Validate Google Spreadsheet key format
+     * Validate Google Spreadsheet key format.
      *
      * @param string $key Spreadsheet key to validate
      * @return bool
@@ -23,7 +23,7 @@ class Validator
     }
 
     /**
-     * Validate page title
+     * Validate page title.
      *
      * @param string $title Title to validate
      * @return bool
@@ -37,7 +37,7 @@ class Validator
     }
 
     /**
-     * Sanitize spreadsheet key
+     * Sanitize spreadsheet key.
      *
      * @param string $key Key to sanitize
      * @return string
@@ -51,7 +51,7 @@ class Validator
     }
 
     /**
-     * Sanitize title
+     * Sanitize title.
      *
      * @param string $title Title to sanitize
      * @return string
